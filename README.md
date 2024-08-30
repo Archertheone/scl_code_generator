@@ -1,5 +1,5 @@
 ## 说明
-本repo为biendata代码生成竞赛的解题代码。(竞赛链接)[https://www.biendata.xyz/competition/siemens-ai/]
+本repo为biendata代码生成竞赛的解题代码。[竞赛链接](https://www.biendata.xyz/competition/siemens-ai/)
 
 ## 运行方式
 
