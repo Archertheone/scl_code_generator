@@ -1,3 +1,6 @@
+## 说明
+本repo为biendata代码生成竞赛的解题代码。(竞赛链接)[https://www.biendata.xyz/competition/siemens-ai/]
+
 ## 运行方式
 
 本代码仓库所有代码均在python3.9.17环境下编写、调试。
