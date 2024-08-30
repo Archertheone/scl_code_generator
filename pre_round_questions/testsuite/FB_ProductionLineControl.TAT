@@ -1,0 +1,144 @@
+TEST_CASE "FB_ProductionLineControl"
+
+PROPERTY
+AUTHOR : ""
+VERSION : "0.1"
+COMMENT : ""
+SCOPE : "PLC_3"
+PLCSIM_INSTANCE_NAME : "FB_ProductionLineControl"
+TEST_EXECUTION_MODE : "SystemManagedPlcSimAdvInstance"
+END_PROPERTY
+
+VAR
+Mode:"FB_ProductionLineControl_DB".Mode;
+ForwardButton:"FB_ProductionLineControl_DB".ForwardButton;
+ReverseButton:"FB_ProductionLineControl_DB".ReverseButton;
+SensorA:"FB_ProductionLineControl_DB".SensorA;
+SensorB:"FB_ProductionLineControl_DB".SensorB;
+SensorC:"FB_ProductionLineControl_DB".SensorC;
+ButtonA:"FB_ProductionLineControl_DB".ButtonA;
+ButtonB:"FB_ProductionLineControl_DB".ButtonB;
+ButtonC:"FB_ProductionLineControl_DB".ButtonC;
+MotorForward:"FB_ProductionLineControl_DB".MotorForward;
+MotorReverse:"FB_ProductionLineControl_DB".MotorReverse;
+CompletionLight:"FB_ProductionLineControl_DB".CompletionLight;
+END_VAR
+
+STEP: "Step 1"
+
+ForwardButton:=1;
+
+RUN(CYCLES:=1);
+ASSERT.Equal(MotorForward,1);
+ASSERT.Equal(MotorReverse,0);
+ASSERT.Equal(CompletionLight,0);
+END_STEP
+
+STEP: "Step 2"
+
+ForwardButton:=0;
+
+RUN(CYCLES:=1);
+ASSERT.Equal(MotorForward,0);
+ASSERT.Equal(MotorReverse,0);
+ASSERT.Equal(CompletionLight,0);
+END_STEP
+
+STEP: "Step 3"
+
+ReverseButton:=1;
+
+RUN(CYCLES:=1);
+ASSERT.Equal(MotorForward,0);
+ASSERT.Equal(MotorReverse,1);
+ASSERT.Equal(CompletionLight,0);
+END_STEP
+
+STEP: "Step 4"
+Mode:=1;
+
+RUN(CYCLES:=1);
+ASSERT.Equal(MotorForward,0);
+ASSERT.Equal(MotorReverse,0);
+ASSERT.Equal(CompletionLight,0);
+END_STEP
+
+STEP: "Step 5"
+Mode:=1;
+SensorA:=1;
+
+RUN(CYCLES:=1);
+ASSERT.Equal(MotorForward,0);
+ASSERT.Equal(MotorReverse,0);
+ASSERT.Equal(CompletionLight,0);
+END_STEP
+
+STEP: "Step 6"
+Mode:=1;
+SensorA:=1;
+ButtonA:=1;
+
+RUN(CYCLES:=1);
+ASSERT.Equal(MotorForward,1);
+ASSERT.Equal(MotorReverse,0);
+ASSERT.Equal(CompletionLight,0);
+END_STEP
+
+STEP: "Step 7"
+Mode:=1;
+SensorB:=1;
+SensorA:=0;
+
+RUN(CYCLES:=1);
+ASSERT.Equal(MotorForward,0);
+ASSERT.Equal(MotorReverse,0);
+ASSERT.Equal(CompletionLight,0);
+END_STEP
+
+STEP: "Step 8"
+Mode:=1;
+SensorB:=1;
+ButtonB:=1;
+
+RUN(CYCLES:=1);
+ASSERT.Equal(MotorForward,1);
+ASSERT.Equal(MotorReverse,0);
+ASSERT.Equal(CompletionLight,0);
+END_STEP
+
+STEP: "Step 9"
+Mode:=1;
+SensorC:=1;
+SensorB:=0;
+
+RUN(CYCLES:=1);
+ASSERT.Equal(MotorForward,0);
+ASSERT.Equal(MotorReverse,0);
+ASSERT.Equal(CompletionLight,0);
+END_STEP
+
+STEP: "Step 10"
+Mode:=1;
+SensorC:=1;
+ButtonC:=1;
+RUN(CYCLES:=1);
+ASSERT.Equal(MotorForward,0);
+ASSERT.Equal(MotorReverse,0);
+ASSERT.Equal(CompletionLight,1);
+END_STEP
+
+STEP: "Step 11"
+Mode:=1;
+SensorC:=0;
+
+RUN(CYCLES:=1);
+ASSERT.Equal(MotorForward,0);
+ASSERT.Equal(MotorReverse,0);
+ASSERT.Equal(CompletionLight,0);
+END_STEP
+
+
+
+
+END_TEST_CASE
+

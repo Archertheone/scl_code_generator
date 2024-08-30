@@ -1,0 +1,149 @@
+TEST_CASE "FB_CalculateDayOfYear"
+
+PROPERTY
+AUTHOR : ""
+VERSION : "0.1"
+COMMENT : ""
+SCOPE : "PLC_3"
+PLCSIM_INSTANCE_NAME : "FB_CalculateDayOfYear"
+TEST_EXECUTION_MODE : "SystemManagedPlcSimAdvInstance"
+END_PROPERTY
+
+VAR
+Year:"FB_CalculateDayOfYear_DB".Year;
+Month:"FB_CalculateDayOfYear_DB".Month;
+Day:"FB_CalculateDayOfYear_DB".Day;
+DayOfYear:"FB_CalculateDayOfYear_DB".DayOfYear;
+error:"FB_CalculateDayOfYear_DB".error;
+status:"FB_CalculateDayOfYear_DB".status;
+END_VAR
+
+STEP: "Step 1"
+Year:=1000;
+Month:=1;
+Day:=1;
+
+RUN(CYCLES:=1);
+ASSERT.Equal(DayOfYear,1);
+ASSERT.Equal(error,0);
+ASSERT.Equal(status,0);
+END_STEP
+
+STEP: "Step 2"
+Year:=3000;
+Month:=12;
+Day:=31;
+
+RUN(CYCLES:=1);
+ASSERT.Equal(DayOfYear,365);
+ASSERT.Equal(error,0);
+ASSERT.Equal(status,0);
+END_STEP
+
+STEP: "Step 3"
+Year:=2024;
+Month:=7;
+Day:=18;
+
+RUN(CYCLES:=1);
+ASSERT.Equal(DayOfYear,200);
+ASSERT.Equal(error,0);
+ASSERT.Equal(status,0);
+END_STEP
+
+STEP: "Step 4"
+Year:=2023;
+Month:=7;
+Day:=18;
+
+RUN(CYCLES:=1);
+ASSERT.Equal(DayOfYear,199);
+ASSERT.Equal(error,0);
+ASSERT.Equal(status,0);
+END_STEP
+
+STEP: "Step 5"
+Year:=3001;
+Month:=7;
+Day:=18;
+
+RUN(CYCLES:=1);
+//ASSERT.Equal(DayOfYear,0);
+ASSERT.Equal(error,TRUE);
+ASSERT.Equal(status,16#8001);
+END_STEP
+
+STEP: "Step 6"
+Year:=2023;
+Month:=13;
+Day:=18;
+
+RUN(CYCLES:=1);
+//ASSERT.Equal(DayOfYear,0);
+ASSERT.Equal(error,TRUE);
+ASSERT.Equal(status,16#8002);
+END_STEP
+
+STEP: "Step 7"
+Year:=2023;
+Month:=7;
+Day:=32;
+
+RUN(CYCLES:=1);
+//ASSERT.Equal(DayOfYear,0);
+ASSERT.Equal(error,TRUE);
+ASSERT.Equal(status,16#8003);
+END_STEP
+
+STEP: "Step 8"
+Year:=999;
+Month:=7;
+Day:=18;
+
+RUN(CYCLES:=1);
+ASSERT.Equal(error,TRUE);
+ASSERT.Equal(status,16#8001);
+END_STEP
+
+STEP: "Step 9"
+Year:=2023;
+Month:=0;
+Day:=18;
+
+RUN(CYCLES:=1);
+ASSERT.Equal(error,TRUE);
+ASSERT.Equal(status,16#8002);
+END_STEP
+
+STEP: "Step 10"
+Year:=2023;
+Month:=2;
+Day:=29;
+
+RUN(CYCLES:=1);
+ASSERT.Equal(error,TRUE);
+ASSERT.Equal(status,16#8003);
+END_STEP
+
+STEP: "Step 11"
+Year:=500;
+Month:=15;
+Day:=188;
+
+RUN(CYCLES:=1);
+ASSERT.Equal(error,TRUE);
+ASSERT.Equal(status,16#8001);
+END_STEP
+
+STEP: "Step 12"
+Year:=1000;
+Month:=-1;
+Day:=188;
+
+RUN(CYCLES:=1);
+ASSERT.Equal(error,TRUE);
+ASSERT.Equal(status,16#8002);
+END_STEP
+
+END_TEST_CASE
+

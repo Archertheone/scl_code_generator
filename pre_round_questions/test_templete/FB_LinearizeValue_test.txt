@@ -1,0 +1,19 @@
+"FB_LinearizeValue"(InputValue:="FB_LinearizeValue_DB".InputValue,
+LinearizedValue=>"FB_LinearizeValue_DB".LinearizedValue,
+Error=>"FB_LinearizeValue_DB".Error,
+Status=>"FB_LinearizeValue_DB".Status);
+
+VAR
+InputValue:"FB_LinearizeValue_DB".InputValue;
+LinearizedValue:"FB_LinearizeValue_DB".LinearizedValue;
+Error:"FB_LinearizeValue_DB".Error;
+Status:"FB_LinearizeValue_DB".Status;
+END_VAR
+
+STEP: "Step "
+InputValue:=0;
+RUN(CYCLES:=1);
+ASSERT.Equal(LinearizedValue,0);
+ASSERT.Equal(Error,0);
+ASSERT.Equal(Status,0);
+END_STEP

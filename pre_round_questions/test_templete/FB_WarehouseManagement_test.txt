@@ -1,0 +1,25 @@
+"FB_WarehouseManagement"(requestIn:="FB_WarehouseManagement_DB".requestIn,
+requestOut:="FB_WarehouseManagement_DB".requestOut,
+productNum=>"FB_WarehouseManagement_DB".productNum,
+libFreeNum=>"FB_WarehouseManagement_DB".libFreeNum,
+error=>"FB_WarehouseManagement_DB".error,
+status=>"FB_WarehouseManagement_DB".status);
+
+VAR
+requestIn:"FB_WarehouseManagement_DB".requestIn;
+requestOut:"FB_WarehouseManagement_DB".requestOut;
+productNum:"FB_WarehouseManagement_DB".productNum;
+libFreeNum:"FB_WarehouseManagement_DB".libFreeNum;
+error:"FB_WarehouseManagement_DB".error;
+status:"FB_WarehouseManagement_DB".status;
+END_VAR
+
+STEP: "Step "
+requestIn:=0;
+requestOut:=0;
+RUN(CYCLES:=1);
+ASSERT.Equal(productNum,0);
+ASSERT.Equal(libFreeNum,0);
+ASSERT.Equal(error,0);
+ASSERT.Equal(status,0);
+END_STEP

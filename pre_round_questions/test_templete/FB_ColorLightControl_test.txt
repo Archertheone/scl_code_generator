@@ -1,0 +1,19 @@
+"FB_ColorLightControl"(controlButton:="FB_ColorLightControl_DB".controlButton,
+greenLight=>"FB_ColorLightControl_DB".greenLight,
+redLight=>"FB_ColorLightControl_DB".redLight,
+yellowLight=>"FB_ColorLightControl_DB".yellowLight);
+
+VAR
+controlButton:"FB_ColorLightControl_DB".controlButton;
+greenLight:"FB_ColorLightControl_DB".greenLight;
+redLight:"FB_ColorLightControl_DB".redLight;
+yellowLight:"FB_ColorLightControl_DB".yellowLight;
+END_VAR
+
+STEP: "Step "
+controlButton:=0;
+RUN(CYCLES:=1);
+ASSERT.Equal(greenLight,0);
+ASSERT.Equal(redLight,0);
+ASSERT.Equal(yellowLight,0);
+END_STEP

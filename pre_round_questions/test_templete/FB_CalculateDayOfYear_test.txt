@@ -1,0 +1,25 @@
+"FB_CalculateDayOfYear"(Year:="FB_CalculateDayOfYear_DB".Year,
+Month:="FB_CalculateDayOfYear_DB".Month,
+Day:="FB_CalculateDayOfYear_DB".Day,
+DayOfYear=>"FB_CalculateDayOfYear_DB".DayOfYear,
+error=>"FB_CalculateDayOfYear_DB".error,
+status=>"FB_CalculateDayOfYear_DB".status);
+
+VAR
+Year:"FB_CalculateDayOfYear_DB".Year;
+Month:"FB_CalculateDayOfYear_DB".Month;
+Day:"FB_CalculateDayOfYear_DB".Day;
+DayOfYear:"FB_CalculateDayOfYear_DB".DayOfYear;
+error:"FB_CalculateDayOfYear_DB".error;
+status:"FB_CalculateDayOfYear_DB".status;
+END_VAR
+
+STEP: "Step "
+Year:=0;
+Month:=0;
+Day:=0;
+RUN(CYCLES:=1);
+ASSERT.Equal(DayOfYear,0);
+ASSERT.Equal(error,0);
+ASSERT.Equal(status,0);
+END_STEP

@@ -1,0 +1,25 @@
+"FB_SplitWordIntoBytes"(InputWord:="FB_SplitWordIntoBytes_DB".InputWord,
+Byte0=>"FB_SplitWordIntoBytes_DB".Byte0,
+Byte1=>"FB_SplitWordIntoBytes_DB".Byte1,
+Byte2=>"FB_SplitWordIntoBytes_DB".Byte2,
+Byte3=>"FB_SplitWordIntoBytes_DB".Byte3,
+average=>"FB_SplitWordIntoBytes_DB".average);
+
+VAR
+InputWord:"FB_SplitWordIntoBytes_DB".InputWord;
+Byte0:"FB_SplitWordIntoBytes_DB".Byte0;
+Byte1:"FB_SplitWordIntoBytes_DB".Byte1;
+Byte2:"FB_SplitWordIntoBytes_DB".Byte2;
+Byte3:"FB_SplitWordIntoBytes_DB".Byte3;
+average:"FB_SplitWordIntoBytes_DB".average;
+END_VAR
+
+STEP: "Step "
+InputWord:=0;
+RUN(CYCLES:=1);
+ASSERT.Equal(Byte0,0);
+ASSERT.Equal(Byte1,0);
+ASSERT.Equal(Byte2,0);
+ASSERT.Equal(Byte3,0);
+ASSERT.Equal(average,0);
+END_STEP

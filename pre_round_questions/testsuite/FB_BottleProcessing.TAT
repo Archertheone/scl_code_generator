@@ -1,0 +1,173 @@
+TEST_CASE "FB_BottleProcessing"
+
+PROPERTY
+AUTHOR : ""
+VERSION : "0.1"
+COMMENT : ""
+SCOPE : "PLC_3"
+PLCSIM_INSTANCE_NAME : "FB_BottleProcessing"
+TEST_EXECUTION_MODE : "SystemManagedPlcSimAdvInstance"
+END_PROPERTY
+
+VAR
+bottleSensor:"FB_BottleProcessing_DB".bottleSensor;
+cleaningConfirmButton:"FB_BottleProcessing_DB".cleaningConfirmButton;
+fillingConfirmButton:"FB_BottleProcessing_DB".fillingConfirmButton;
+cappingConfirmButton:"FB_BottleProcessing_DB".cappingConfirmButton;
+packingConfirmButton:"FB_BottleProcessing_DB".packingConfirmButton;
+finishedButton:"FB_BottleProcessing_DB".finishedButton;
+Pump_Motor:"FB_BottleProcessing_DB".Pump_Motor;
+Filling_Valve:"FB_BottleProcessing_DB".Filling_Valve;
+Capping_Machine:"FB_BottleProcessing_DB".Capping_Machine;
+Packing_Machine:"FB_BottleProcessing_DB".Packing_Machine;
+Completion_Light:"FB_BottleProcessing_DB".Completion_Light;
+
+END_VAR
+
+STEP: "Step 1"
+bottleSensor:=1;
+RUN(CYCLES:=1);
+//ASSERT.Equal(bottleSensor,1);
+//ASSERT.Equal(cleaningConfirmButton,0);
+//ASSERT.Equal(fillingConfirmButton,0);
+//ASSERT.Equal(cappingConfirmButton,0);
+//ASSERT.Equal(packingConfirmButton,0);
+//ASSERT.Equal(finishedButton,0);
+
+ASSERT.Equal(Pump_Motor,1);
+ASSERT.Equal(Filling_Valve,0);
+ASSERT.Equal(Capping_Machine,0);
+ASSERT.Equal(Packing_Machine,0);
+ASSERT.Equal(Completion_Light,0);
+
+END_STEP
+
+STEP: "Step 1+"
+bottleSensor:=0;
+RUN(CYCLES:=1);
+END_STEP
+
+STEP: "Step 2"
+cleaningConfirmButton:=1;
+
+RUN(CYCLES:=1);
+//ASSERT.Equal(bottleSensor,1);
+//ASSERT.Equal(cleaningConfirmButton,0);
+//ASSERT.Equal(fillingConfirmButton,0);
+//ASSERT.Equal(cappingConfirmButton,0);
+//ASSERT.Equal(packingConfirmButton,0);
+//ASSERT.Equal(finishedButton,0);
+
+ASSERT.Equal(Pump_Motor,0);
+ASSERT.Equal(Filling_Valve,1);
+ASSERT.Equal(Capping_Machine,0);
+ASSERT.Equal(Packing_Machine,0);
+ASSERT.Equal(Completion_Light,0);
+
+END_STEP
+
+STEP: "Step 2+"
+cleaningConfirmButton:=0;
+RUN(CYCLES:=1);
+END_STEP
+
+
+STEP: "Step 3"
+fillingConfirmButton:=1;
+RUN(CYCLES:=1);
+//ASSERT.Equal(bottleSensor,1);
+//ASSERT.Equal(cleaningConfirmButton,0);
+//ASSERT.Equal(fillingConfirmButton,0);
+//ASSERT.Equal(cappingConfirmButton,0);
+//ASSERT.Equal(packingConfirmButton,0);
+//ASSERT.Equal(finishedButton,0);
+
+ASSERT.Equal(Pump_Motor,0);
+ASSERT.Equal(Filling_Valve,0);
+ASSERT.Equal(Capping_Machine,1);
+ASSERT.Equal(Packing_Machine,0);
+ASSERT.Equal(Completion_Light,0);
+
+END_STEP
+
+STEP: "Step 3+"
+fillingConfirmButton:=0;
+RUN(CYCLES:=1);
+END_STEP
+
+STEP: "Step 4"
+cappingConfirmButton:=1;
+RUN(CYCLES:=1);
+//ASSERT.Equal(bottleSensor,1);
+//ASSERT.Equal(cleaningConfirmButton,0);
+//ASSERT.Equal(fillingConfirmButton,0);
+//ASSERT.Equal(cappingConfirmButton,0);
+//ASSERT.Equal(packingConfirmButton,0);
+//ASSERT.Equal(finishedButton,0);
+
+ASSERT.Equal(Pump_Motor,0);
+ASSERT.Equal(Filling_Valve,0);
+ASSERT.Equal(Capping_Machine,0);
+ASSERT.Equal(Packing_Machine,1);
+ASSERT.Equal(Completion_Light,0);
+
+END_STEP
+
+STEP: "Step 4+"
+cappingConfirmButton:=0;
+RUN(CYCLES:=1);
+END_STEP
+
+STEP: "Step 5"
+packingConfirmButton:=1;
+RUN(CYCLES:=1);
+//ASSERT.Equal(bottleSensor,1);
+//ASSERT.Equal(cleaningConfirmButton,0);
+//ASSERT.Equal(fillingConfirmButton,0);
+//ASSERT.Equal(cappingConfirmButton,0);
+//ASSERT.Equal(packingConfirmButton,0);
+//ASSERT.Equal(finishedButton,0);
+
+ASSERT.Equal(Pump_Motor,0);
+ASSERT.Equal(Filling_Valve,0);
+ASSERT.Equal(Capping_Machine,0);
+ASSERT.Equal(Packing_Machine,0);
+ASSERT.Equal(Completion_Light,1);
+
+END_STEP
+
+STEP: "Step 5+"
+packingConfirmButton:=0;
+RUN(CYCLES:=1);
+END_STEP
+
+STEP: "Step 6"
+finishedButton:=1;
+RUN(CYCLES:=1);
+//ASSERT.Equal(bottleSensor,1);
+//ASSERT.Equal(cleaningConfirmButton,0);
+//ASSERT.Equal(fillingConfirmButton,0);
+//ASSERT.Equal(cappingConfirmButton,0);
+//ASSERT.Equal(packingConfirmButton,0);
+//ASSERT.Equal(finishedButton,0);
+
+ASSERT.Equal(Pump_Motor,0);
+ASSERT.Equal(Filling_Valve,0);
+ASSERT.Equal(Capping_Machine,0);
+ASSERT.Equal(Packing_Machine,0);
+ASSERT.Equal(Completion_Light,0);
+
+END_STEP
+
+STEP: "Step 6+"
+finishedButton:=0;
+RUN(CYCLES:=1);
+END_STEP
+
+
+
+
+
+
+END_TEST_CASE
+

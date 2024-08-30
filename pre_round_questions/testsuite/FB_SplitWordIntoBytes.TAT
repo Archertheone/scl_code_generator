@@ -1,0 +1,82 @@
+TEST_CASE "FB_SplitWordIntoBytes"
+
+PROPERTY
+AUTHOR : ""
+VERSION : "0.1"
+COMMENT : ""
+SCOPE : "PLC_3"
+PLCSIM_INSTANCE_NAME : "FB_SplitWordIntoBytes"
+TEST_EXECUTION_MODE : "SystemManagedPlcSimAdvInstance"
+END_PROPERTY
+
+VAR
+InputWord:"FB_SplitWordIntoBytes_DB".InputWord;
+Byte0:"FB_SplitWordIntoBytes_DB".Byte0;
+Byte1:"FB_SplitWordIntoBytes_DB".Byte1;
+Byte2:"FB_SplitWordIntoBytes_DB".Byte2;
+Byte3:"FB_SplitWordIntoBytes_DB".Byte3;
+average:"FB_SplitWordIntoBytes_DB".average;
+END_VAR
+
+STEP: "Step 1"
+InputWord:=16#0;
+RUN(CYCLES:=1);
+ASSERT.Equal(Byte0,0);
+ASSERT.Equal(Byte1,0);
+ASSERT.Equal(Byte2,0);
+ASSERT.Equal(Byte3,0);
+ASSERT.Equal(average,0);
+END_STEP
+
+STEP: "Step 2"
+InputWord:=16#0100;
+RUN(CYCLES:=1);
+ASSERT.Equal(Byte0,0);
+ASSERT.Equal(Byte1,0);
+ASSERT.Equal(Byte2,1);
+ASSERT.Equal(Byte3,0);
+ASSERT.Equal(average,1);
+END_STEP
+
+STEP: "Step 3"
+InputWord:=16#FFFF;
+RUN(CYCLES:=1);
+ASSERT.Equal(Byte0,15);
+ASSERT.Equal(Byte1,15);
+ASSERT.Equal(Byte2,15);
+ASSERT.Equal(Byte3,15);
+ASSERT.Equal(average,15);
+END_STEP
+
+STEP: "Step 4"
+InputWord:=16#ABCD;
+RUN(CYCLES:=1);
+ASSERT.Equal(Byte0,13);
+ASSERT.Equal(Byte1,12);
+ASSERT.Equal(Byte2,11);
+ASSERT.Equal(Byte3,10);
+ASSERT.Equal(average,11.5);
+END_STEP
+
+STEP: "Step 5"
+InputWord:=16#0ABC;
+RUN(CYCLES:=1);
+ASSERT.Equal(Byte0,12);
+ASSERT.Equal(Byte1,11);
+ASSERT.Equal(Byte2,10);
+ASSERT.Equal(Byte3,0);
+ASSERT.Equal(average,11);
+END_STEP
+
+STEP: "Step 6"
+InputWord:=16#A0C0;
+RUN(CYCLES:=1);
+ASSERT.Equal(Byte0,0);
+ASSERT.Equal(Byte1,12);
+ASSERT.Equal(Byte2,0);
+ASSERT.Equal(Byte3,10);
+ASSERT.Equal(average,11);
+END_STEP
+
+END_TEST_CASE
+

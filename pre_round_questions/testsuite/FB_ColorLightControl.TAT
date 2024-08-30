@@ -1,0 +1,122 @@
+TEST_CASE "FB_ColorLightControl"
+
+PROPERTY
+AUTHOR : ""
+VERSION : "0.1"
+COMMENT : ""
+SCOPE : "PLC_3"
+PLCSIM_INSTANCE_NAME : "FB_ColorLightControl"
+TEST_EXECUTION_MODE : "SystemManagedPlcSimAdvInstance"
+END_PROPERTY
+
+VAR
+controlButton:"FB_ColorLightControl_DB".controlButton;
+greenLight:"FB_ColorLightControl_DB".greenLight;
+redLight:"FB_ColorLightControl_DB".redLight;
+yellowLight:"FB_ColorLightControl_DB".yellowLight;
+END_VAR
+
+
+
+
+STEP: "Step 1"
+controlButton:=1;
+
+RUN(CYCLES:=1);
+ASSERT.Equal(greenLight,1);
+ASSERT.Equal(redLight,0);
+ASSERT.Equal(yellowLight,0);
+END_STEP
+
+STEP: "Step 1+"
+controlButton:=0;
+RUN(CYCLES:=1);
+END_STEP
+
+STEP: "Step 2"
+
+controlButton:=1;
+
+RUN(CYCLES:=1);
+ASSERT.Equal(greenLight,0);
+ASSERT.Equal(redLight,1);
+ASSERT.Equal(yellowLight,0);
+END_STEP
+
+STEP: "Step 3"
+controlButton:=0;
+
+RUN(CYCLES:=1);
+ASSERT.Equal(greenLight,0);
+ASSERT.Equal(redLight,1);
+ASSERT.Equal(yellowLight,0);
+END_STEP
+
+STEP: "Step 4"
+controlButton:=1;
+
+RUN(CYCLES:=1);
+ASSERT.Equal(greenLight,0);
+ASSERT.Equal(redLight,0);
+ASSERT.Equal(yellowLight,1);
+END_STEP
+
+STEP: "Step 4+"
+controlButton:=0;
+RUN(CYCLES:=1);
+END_STEP
+
+STEP: "Step 5"
+controlButton:=1;
+
+RUN(CYCLES:=1);
+ASSERT.Equal(greenLight,1);
+ASSERT.Equal(redLight,1);
+ASSERT.Equal(yellowLight,1);
+END_STEP
+
+STEP: "Step 5+"
+controlButton:=0;
+RUN(CYCLES:=1);
+END_STEP
+
+STEP: "Step 6"
+controlButton:=1;
+
+RUN(CYCLES:=1);
+ASSERT.Equal(greenLight,0);
+ASSERT.Equal(redLight,0);
+ASSERT.Equal(yellowLight,0);
+END_STEP
+
+STEP: "Step 6+"
+controlButton:=0;
+RUN(CYCLES:=1);
+END_STEP
+
+STEP: "Step 7"
+controlButton:=1;
+
+RUN(CYCLES:=1);
+ASSERT.Equal(greenLight,1);
+ASSERT.Equal(redLight,0);
+ASSERT.Equal(yellowLight,0);
+END_STEP
+
+STEP: "Step 7+"
+controlButton:=0;
+RUN(CYCLES:=1);
+END_STEP
+
+STEP: "Step 8"
+controlButton:=1;
+
+RUN(CYCLES:=1);
+ASSERT.Equal(greenLight,0);
+ASSERT.Equal(redLight,1);
+ASSERT.Equal(yellowLight,0);
+END_STEP
+
+
+END_TEST_CASE
+

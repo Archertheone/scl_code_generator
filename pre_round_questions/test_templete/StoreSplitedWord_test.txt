@@ -1,0 +1,16 @@
+"StoreSplitedWord"(InputWord:="StoreSplitedWord_DB".InputWord,
+error=>"StoreSplitedWord_DB".error,
+status=>"StoreSplitedWord_DB".status);
+
+VAR
+InputWord:"StoreSplitedWord_DB".InputWord;
+error:"StoreSplitedWord_DB".error;
+status:"StoreSplitedWord_DB".status;
+END_VAR
+
+STEP: "Step "
+InputWord:=0;
+RUN(CYCLES:=1);
+ASSERT.Equal(error,0);
+ASSERT.Equal(status,0);
+END_STEP

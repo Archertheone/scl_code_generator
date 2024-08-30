@@ -1,0 +1,93 @@
+TEST_CASE "FB_LinearizeValue"
+
+PROPERTY
+AUTHOR : ""
+VERSION : "0.1"
+COMMENT : ""
+SCOPE : "PLC_3"
+PLCSIM_INSTANCE_NAME : "FB_LinearizeValue"
+TEST_EXECUTION_MODE : "SystemManagedPlcSimAdvInstance"
+END_PROPERTY
+
+VAR
+InputValue:"FB_LinearizeValue_DB".InputValue;
+LinearizedValue:"FB_LinearizeValue_DB".LinearizedValue;
+Error:"FB_LinearizeValue_DB".Error;
+Status:"FB_LinearizeValue_DB".Status;
+END_VAR
+
+STEP: "Step 1"
+InputValue:=1199.99;
+RUN(CYCLES:=1);
+ASSERT.Equal(LinearizedValue,150);
+ASSERT.Equal(Error,1);
+ASSERT.Equal(Status,16#8001);
+END_STEP
+
+STEP: "Step 2"
+InputValue:=7000.11;
+RUN(CYCLES:=1);
+ASSERT.Equal(LinearizedValue,720);
+ASSERT.Equal(Error,1);
+ASSERT.Equal(Status,16#8001);
+END_STEP
+
+STEP: "Step 3"
+InputValue:=1200;
+RUN(CYCLES:=1);
+ASSERT.Equal(LinearizedValue,150);
+ASSERT.Equal(Error,0);
+ASSERT.Equal(Status,0);
+END_STEP
+
+STEP: "Step 4"
+InputValue:=2000.05;
+RUN(CYCLES:=1);
+ASSERT.InRange(LinearizedValue,180.001,180.002);
+ASSERT.Equal(Error,0);
+ASSERT.Equal(Status,0);
+END_STEP
+
+STEP: "Step 5"
+InputValue:=3600;
+RUN(CYCLES:=1);
+ASSERT.Equal(LinearizedValue,240);
+ASSERT.Equal(Error,0);
+ASSERT.Equal(Status,0);
+END_STEP
+
+STEP: "Step 6"
+InputValue:=4000.99;
+RUN(CYCLES:=1);
+ASSERT.InRange(LinearizedValue,346.930,346.931);
+ASSERT.Equal(Error,0);
+ASSERT.Equal(Status,0);
+END_STEP
+
+STEP: "Step 7"
+InputValue:=4800;
+RUN(CYCLES:=1);
+ASSERT.Equal(LinearizedValue,560);
+ASSERT.Equal(Error,0);
+ASSERT.Equal(Status,0);
+END_STEP
+
+STEP: "Step 8"
+InputValue:=5999.002;
+RUN(CYCLES:=1);
+ASSERT.InRange(LinearizedValue,647.200,647.201);
+ASSERT.Equal(Error,0);
+ASSERT.Equal(Status,0);
+END_STEP
+
+STEP: "Step 9"
+InputValue:=7000;
+RUN(CYCLES:=1);
+ASSERT.Equal(LinearizedValue,720);
+ASSERT.Equal(Error,0);
+ASSERT.Equal(Status,0);
+END_STEP
+
+
+END_TEST_CASE
+

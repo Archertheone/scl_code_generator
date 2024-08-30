@@ -1,0 +1,100 @@
+TEST_CASE "FB_SplitNumber"
+
+PROPERTY
+AUTHOR : ""
+VERSION : "0.1"
+COMMENT : ""
+SCOPE : "PLC_3"
+PLCSIM_INSTANCE_NAME : "FB_SplitNumber"
+TEST_EXECUTION_MODE : "SystemManagedPlcSimAdvInstance"
+END_PROPERTY
+
+VAR
+InputNumber:"FB_SplitNumber_DB".InputNumber;
+Thousands:"FB_SplitNumber_DB".Thousands;
+Hundreds:"FB_SplitNumber_DB".Hundreds;
+Tens:"FB_SplitNumber_DB".Tens;
+Ones:"FB_SplitNumber_DB".Ones;
+Min:"FB_SplitNumber_DB".Min;
+error:"FB_SplitNumber_DB".error;
+status:"FB_SplitNumber_DB".status;
+END_VAR
+
+STEP: "Step 1"
+InputNumber:=0;
+RUN(CYCLES:=1);
+ASSERT.Equal(Thousands,0);
+ASSERT.Equal(Hundreds,0);
+ASSERT.Equal(Tens,0);
+ASSERT.Equal(Ones,0);
+ASSERT.Equal(Min,0);
+ASSERT.Equal(error,0);
+ASSERT.Equal(status,0);
+END_STEP
+
+STEP: "Step 2"
+InputNumber:=-1;
+RUN(CYCLES:=1);
+ASSERT.Equal(Thousands,0);
+ASSERT.Equal(Hundreds,0);
+ASSERT.Equal(Tens,0);
+ASSERT.Equal(Ones,0);
+ASSERT.Equal(Min,0);
+ASSERT.Equal(error,1);
+ASSERT.Equal(status,16#8001);
+END_STEP
+
+STEP: "Step 3"
+InputNumber:=9999;
+RUN(CYCLES:=1);
+ASSERT.Equal(Thousands,9);
+ASSERT.Equal(Hundreds,9);
+ASSERT.Equal(Tens,9);
+ASSERT.Equal(Ones,9);
+ASSERT.Equal(Min,9);
+ASSERT.Equal(error,0);
+ASSERT.Equal(status,0);
+END_STEP
+
+STEP: "Step 4"
+InputNumber:=120;
+RUN(CYCLES:=1);
+ASSERT.Equal(Thousands,0);
+ASSERT.Equal(Hundreds,1);
+ASSERT.Equal(Tens,2);
+ASSERT.Equal(Ones,0);
+ASSERT.Equal(Min,1);
+ASSERT.Equal(error,0);
+ASSERT.Equal(status,0);
+END_STEP
+
+STEP: "Step 5"
+InputNumber:=10000;
+RUN(CYCLES:=1);
+ASSERT.Equal(Thousands,0);
+ASSERT.Equal(Hundreds,0);
+ASSERT.Equal(Tens,0);
+ASSERT.Equal(Ones,0);
+ASSERT.Equal(Min,0);
+ASSERT.Equal(error,1);
+ASSERT.Equal(status,16#8001);
+END_STEP
+
+STEP: "Step 6"
+InputNumber:=1;
+RUN(CYCLES:=1);
+ASSERT.Equal(Thousands,0);
+ASSERT.Equal(Hundreds,0);
+ASSERT.Equal(Tens,0);
+ASSERT.Equal(Ones,1);
+ASSERT.Equal(Min,1);
+ASSERT.Equal(error,0);
+ASSERT.Equal(status,0);
+END_STEP
+
+
+
+
+
+END_TEST_CASE
+
